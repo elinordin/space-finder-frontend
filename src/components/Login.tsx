@@ -14,7 +14,6 @@ interface LoginState {
 
 export default class Login extends React.Component<LoginProps, LoginState> {
 
-    //The initial value of the LoginState
     state: LoginState = {
         userName: '',
         password: '',
@@ -52,7 +51,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                     <input 
                         type="submit" value="Login" />
                 </form>
-                {this.state.loginAttempted && <p>{this.state.loginSuccessful ? 'You are logged in' : 'Wrong login details'}</p>}
+                {this.state.loginAttempted && <p>{this.state.loginSuccessful ? 'Login successful' : 'Login failed'}</p>}
             </section>
         )
     }
