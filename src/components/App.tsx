@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default class App extends React.Component{
+import { User } from '../models/model'
+
+interface AppState{
+  user: User | undefined
+}
+
+export default class App extends React.Component<{}, AppState>{
 
   render() {
     return (
