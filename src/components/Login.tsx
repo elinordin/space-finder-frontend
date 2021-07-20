@@ -1,8 +1,10 @@
 import React, { SyntheticEvent } from 'react';
 import { AuthService } from '../services/AuthService';
+import { User } from '../models/Model';
 
 interface LoginProps {
-    authService: AuthService
+    authService: AuthService,
+    setUser:(user: User) => void
 }
 
 interface LoginState {
@@ -28,8 +30,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         const result = await this.props.authService.login(
             this.state.userName, this.state.password
         )
+        
+        if (result) {
+            this.setState({loginSuccessful: true})
+            this.props.setUser(result)
+        } else {
+            this.setState({loginSuccessful: false})
+        }
 
-        this.setState(result? {loginSuccessful: true} : {loginSuccessful: false})
     }
 
 
