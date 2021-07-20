@@ -1,6 +1,11 @@
 import React from 'react';
+import { AuthService } from '../services/AuthService';
 
-export default class Login extends React.Component<{}, {}> {
+interface LoginProps {
+    authService: AuthService
+}
+
+export default class Login extends React.Component<LoginProps> {
 
     render() {
         return (
