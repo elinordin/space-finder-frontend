@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { AuthService } from '../services/AuthService';
 
 interface LoginProps {
@@ -22,17 +22,37 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         loginSuccessful: false
     }
 
+    private async handleSubmit (e: SyntheticEvent) {
+        e.preventDefault()
+        this.setState({loginAttempted: true})
+
+        const result = await this.props.authService.login(
+            this.state.userName, this.state.password
+        )
+
+        this.setState(result? {loginSuccessful: true} : {loginSuccessful: false})
+    }
+
+
     render() {
         return (
             <section className="login">
                 <h2>Please login</h2>
-                <form>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <label htmlFor="userName">Username:</label>
-                    <input value={this.state.userName} type="text" id="userName" /><br/>
+                    <input 
+                        value={this.state.userName} 
+                        onChange={(e) => this.setState({userName: e.target.value})}
+                        type="text" id="userName" /><br/>
                     <label htmlFor="password">Password:</label>
-                    <input value={this.state.password} type="password" name="" id="password" /><br/>
-                    <input type="submit" value="Login" />
+                    <input 
+                        value={this.state.password} 
+                        onChange={(e) => this.setState({password: e.target.value})}
+                        type="text" name="" id="password" /><br/>
+                    <input 
+                        type="submit" value="Login" />
                 </form>
+                {this.state.loginAttempted && <p>{this.state.loginSuccessful ? 'You are logged in' : 'Wrong login details'}</p>}
             </section>
         )
     }
