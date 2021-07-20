@@ -2,8 +2,14 @@ import React from 'react';
 
 import { User } from '../models/Model'
 import { AuthService } from '../services/AuthService'
+import { Router, Route, Switch } from 'react-router-dom';
+import history from '../utilities/history';
 
+import Nav from './Nav'
+import Home from './Home'
 import Login from './Login'
+import Profile from './Profile'
+
 
 interface AppState{
   user: User | undefined
@@ -13,6 +19,7 @@ export default class App extends React.Component<{}, AppState>{
 
   constructor(props: any) {
     super(props)
+    this.state = {user: undefined}
 
     this.setUser = this.setUser.bind(this)
   }
@@ -23,8 +30,17 @@ export default class App extends React.Component<{}, AppState>{
 
   render() {
     return (
-      <div className='App'>
-        <Login authService={this.authService} setUser={this.setUser}/>
+      <div className='app'>
+        <Router history={history}>
+          <Nav user={this.state.user}/>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route exact path='/login'>
+              <Login authService={this.authService} setUser={this.setUser}/>
+            </Route>
+            <Route exact path='/profile' component={Profile}/>
+          </Switch>
+        </Router>
       </div>
     )
   }
