@@ -9,7 +9,7 @@ interface AppState{
   user: User | undefined
 }
 
-export default class App extends React.Component<AppState>{
+export default class App extends React.Component<{}, AppState>{
 
   private authService : AuthService = new AuthService();
 

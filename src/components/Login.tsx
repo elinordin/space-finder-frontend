@@ -24,9 +24,16 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
     render() {
         return (
-            <div>
-                Login
-            </div>
+            <section className="login">
+                <h2>Please login</h2>
+                <form>
+                    <label htmlFor="userName">Username:</label>
+                    <input value={this.state.userName} type="text" id="userName" /><br/>
+                    <label htmlFor="password">Password:</label>
+                    <input value={this.state.password} type="password" name="" id="password" /><br/>
+                    <input type="submit" value="Login" />
+                </form>
+            </section>
         )
     }
 }
