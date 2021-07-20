@@ -1,4 +1,5 @@
 import React from 'react';
+import { User } from '../models/Model';
 
 interface ProfileProps {user: User}
 
