@@ -4,3 +4,8 @@ export interface User {
     name: string,
     email: string
 }
+
+export interface UserAttribute {
+    key: string,
+    value: string
+}

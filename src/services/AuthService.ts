@@ -1,4 +1,4 @@
-import { User } from '../models/Model'
+import { User, UserAttribute } from '../models/Model'
 
 export class AuthService {
     
@@ -10,5 +10,15 @@ export class AuthService {
         } else {
             return undefined
         }
+    }
+
+    public async getUserAttributes():Promise<UserAttribute[]>{
+        const result: UserAttribute[] = []
+        result.push({key: 'Description', value: 'Yo yo yo! I am the best user'})
+        result.push({key: 'Age', value: 'Soon to be 27'})
+        result.push({key: 'Country', value: 'Sweden'})
+        result.push({key: 'Job', value: 'Engineer'})
+        
+        return result
     }
 }
