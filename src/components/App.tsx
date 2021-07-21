@@ -9,6 +9,7 @@ import Nav from './Nav'
 import Home from './Home'
 import Login from './Login'
 import Profile from './Profile'
+import Space from './Space'
 
 
 interface AppState{
@@ -40,6 +41,9 @@ export default class App extends React.Component<{}, AppState>{
             </Route>
             <Route exact path='/profile'>
               <Profile authService={this.authService} user={this.state.user}/>
+            </Route>
+            <Route exact path='/spaces'>
+              <Space/>
             </Route>
           </Switch>
         </Router>

@@ -31,6 +31,7 @@ export default class Nav extends React.Component<NavProps> {
                 <div style={styles.left}>
                     <Link to='/' style={styles.link}>Home</Link>
                     <Link to='/profile' style={styles.link}>Profile</Link>      
+                    <Link to='/spaces' style={styles.link}>Spaces</Link>      
                 </div>
                 <Link to='/login' style={styles.link}>{this.props.user? 'Logout' : 'Login'}</Link>
             </nav>
