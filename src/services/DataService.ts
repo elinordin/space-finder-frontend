@@ -17,7 +17,7 @@ export class DataService {
         })
 
         result.push({
-            id: '2', 
+            id: '3', 
             name: 'Selma SPA',
             location: 'Sunne',
         })

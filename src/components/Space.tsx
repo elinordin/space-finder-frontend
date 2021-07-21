@@ -12,7 +12,7 @@ export default class Space extends React.Component<SpaceProps>{
     render() {
         return (
             <div>
-                <img src={this.props.photo? this.props.photo : 'https://picsum.photos/200/300'} alt=''/>
+                <img src={this.props.photo? this.props.photo : 'https://picsum.photos/400/300'} alt=''/>
                 <ul>
                     <li>{this.props.id}</li>
                     <li>{this.props.name}</li>
