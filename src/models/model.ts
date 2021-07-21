@@ -9,3 +9,10 @@ export interface UserAttribute {
     key: string,
     value: string
 }
+
+export interface SpaceItem {
+    id: string,
+    name: string,
+    location: string,
+    photo?: string
+}

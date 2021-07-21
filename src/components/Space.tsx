@@ -4,7 +4,7 @@ interface SpaceProps {
     id: string,
     name: string,
     location: string,
-    photo: string,
+    photo?: string,
     reserve: (id: string) => void
 }
 

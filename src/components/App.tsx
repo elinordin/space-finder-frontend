@@ -9,7 +9,8 @@ import Nav from './Nav'
 import Home from './Home'
 import Login from './Login'
 import Profile from './Profile'
-import Space from './Space'
+import Spaces from './Spaces'
+import { DataService } from '../services/DataService';
 
 
 interface AppState{
@@ -26,6 +27,7 @@ export default class App extends React.Component<{}, AppState>{
   }
 
   private authService : AuthService = new AuthService();
+  private dataService : DataService = new DataService();
   
   private setUser(user: User){this.setState({user: user})}
 
@@ -43,7 +45,7 @@ export default class App extends React.Component<{}, AppState>{
               <Profile authService={this.authService} user={this.state.user}/>
             </Route>
             <Route exact path='/spaces'>
-              <Space/>
+              <Spaces dataService={this.dataService}/>
             </Route>
           </Switch>
         </Router>
