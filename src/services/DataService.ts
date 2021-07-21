@@ -25,11 +25,11 @@ export class DataService {
         return result
     }
 
-    public async reserveSpace(id: string):Promise<number | undefined> {
+    public async reserveSpace(id: string):Promise<boolean> {
         if (id === '1') {
-            return 200
+            return true
         } else {
-            return undefined
+            return false
         }
     }
 }

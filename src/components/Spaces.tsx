@@ -1,11 +1,14 @@
 import React from 'react';
-import { GeneratedIdentifierFlags } from 'typescript';
 import { SpaceItem } from '../models/Model';
 import { DataService } from '../services/DataService';
+import ReservationPopup from './ReservationPopup';
 import Space from './Space'
 
 interface SpacesStates {
-    spaces: SpaceItem[]
+    spaces: SpaceItem[],
+    popupVisible: boolean,
+    popupId: string,
+    available: boolean
 }
 
 interface SpacesProps {
@@ -26,8 +29,14 @@ export default class Spaces extends React.Component<SpacesProps, SpacesStates> {
     
     constructor(props: SpacesProps) {
         super(props)
-        this.state = {spaces: []}
+        this.state = {
+            spaces: [],
+            popupVisible: false,
+            popupId: '',
+            available: false
+        }
         this.reserve = this.reserve.bind(this)
+        this.close = this.close.bind(this)
     }
 
     
@@ -37,7 +46,15 @@ export default class Spaces extends React.Component<SpacesProps, SpacesStates> {
         this.setState({spaces: spaces})
     }
 
-    private async reserve(id: string){}
+    private async reserve(id: string){
+        const response = await this.props.dataService.reserveSpace(id)
+
+        this.setState({popupVisible: true, popupId: id, available: response})
+    }
+
+    private close(){
+        this.setState({popupVisible: false})
+    }
 
     render() {
         return (
@@ -45,6 +62,13 @@ export default class Spaces extends React.Component<SpacesProps, SpacesStates> {
                 {this.state.spaces.map((space) => (
                     <Space key={space.id} id={space.id} name={space.name} location={space.location} reserve={this.reserve} />
                 ))}
+
+                <ReservationPopup 
+                    visible={this.state.popupVisible} 
+                    available={this.state.available} 
+                    id={this.state.popupId} 
+                    close={this.close}
+                />
             </ul>
         )
     }

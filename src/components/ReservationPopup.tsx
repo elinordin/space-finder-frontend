@@ -19,6 +19,6 @@ export default class ReservationPopup extends React.Component <ReservationPopupP
                     <button onClick={this.props.close}>Ok, got it!</button>
                 </div>
             )
-        }
+        } else {return null}
     }
 }
