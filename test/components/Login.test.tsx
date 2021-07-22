@@ -14,7 +14,7 @@ describe('Login component test suite', () => {
     })
 
     afterEach(() => {
-        
+        jest.clearAllMocks()
     })
 
     test('Contains all HTML-elements', () => {
