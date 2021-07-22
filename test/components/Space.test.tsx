@@ -20,7 +20,7 @@ describe('Space test suite', () => {
     })
 
 
-    describe('Without photoURL', () => {
+    describe('Without photo-prop', () => {
         beforeEach(() => {
             ReactDOM.render(
                 <Space 
@@ -45,10 +45,11 @@ describe('Space test suite', () => {
 
             expect(reserveMock).toBeCalledWith('1')
         })
+        
     })
 
 
-    describe('With photoURL', () => {
+    describe('With photo-prop', () => {
         beforeEach(() => {
             ReactDOM.render(
                 <Space 
@@ -66,6 +67,7 @@ describe('Space test suite', () => {
             const image = document.querySelector('img')!
             expect(image.src).toBe('https://picsum.photos/500/500')
         })
+        
     })
 
     
