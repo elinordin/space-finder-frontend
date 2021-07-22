@@ -1,12 +1,23 @@
 import ReactDOM from 'react-dom'
 import Login from '../../src/components/Login'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, waitFor } from '@testing-library/react'
+import history from '../../src/utilities/history'
+import { User } from '../../src/models/Model'
+
+
+const someUser: User = {
+    name: 'user',
+    email: 'user@email.com'
+}
+
 
 describe('Login component test suite', () => {
 
     //Mocking the functions needed as props in our Login-component
     const authServiceMock = {login: jest.fn()}
     const setUserMock = jest.fn()
+    const historyMock = history
+    history.push = jest.fn()
 
     let container : HTMLElement
 
@@ -53,5 +64,43 @@ describe('Login component test suite', () => {
         fireEvent.click(loginButton)
 
         expect(authServiceMock.login).toBeCalledWith('aUserName', 'aPassword')
+    })
+
+
+    test('Correctly handles login success', async () => {
+        authServiceMock.login.mockResolvedValueOnce(someUser)
+
+        const userNameInput = document.querySelector('input#userName')!
+        const passwordInput = document.querySelector('input#password')!
+        const loginButton = document.querySelector('input[type="submit"]')!
+
+        fireEvent.change(userNameInput, {target:{value: 'userName'}})
+        fireEvent.change(passwordInput, {target:{value: 'password'}})
+        fireEvent.click(loginButton)
+
+        const message = await waitFor(() => container.querySelector('.message')!)
+        expect(message).toBeInTheDocument()
+        expect(message).toHaveTextContent('Login successful')
+        expect(setUserMock).toBeCalledWith(someUser)
+        expect(historyMock.push).toBeCalledWith('/profile')
+    })
+
+
+    test('Correctly handles login failure', async () => {
+        authServiceMock.login.mockResolvedValueOnce(undefined)
+
+        const userNameInput = document.querySelector('input#userName')!
+        const passwordInput = document.querySelector('input#password')!
+        const loginButton = document.querySelector('input[type="submit"]')!
+
+        fireEvent.change(userNameInput, {target:{value: 'userName'}})
+        fireEvent.change(passwordInput, {target:{value: 'password'}})
+        fireEvent.click(loginButton)
+
+        const message = await waitFor(() => container.querySelector('.message')!)
+        expect(message).toBeInTheDocument()
+        expect(message).toHaveTextContent('Login failed')
+        expect(setUserMock).not.toBeCalled()
+        expect(historyMock.push).not.toBeCalled()
     })
 })
