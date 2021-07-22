@@ -11,7 +11,7 @@ interface SpaceProps {
 export default class Space extends React.Component<SpaceProps>{
     render() {
         return (
-            <div>
+            <div className='space-component'>
                 <img src={this.props.photo? this.props.photo : 'https://picsum.photos/400/300'} alt=''/>
                 <ul>
                     <li>{this.props.id}</li>

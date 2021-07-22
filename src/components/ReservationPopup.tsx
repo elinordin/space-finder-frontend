@@ -14,7 +14,7 @@ export default class ReservationPopup extends React.Component <ReservationPopupP
     render() {
         if (this.props.visible) {
             return (
-                <div className='background'>
+                <div className='background popup'>
                     <div className='popup'>
                         <h2>{this.props.available? 'Reservation successful' : 'Reservation failed'}</h2>
                         <p>{this.props.available? `Your booking ID is: ${this.props.id}` : 'Please try another day'}</p>
