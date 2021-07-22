@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom'
 import Login from '../../src/components/Login'
+import { fireEvent } from '@testing-library/react'
 
 describe('Login component test suite', () => {
 
@@ -39,5 +40,18 @@ describe('Login component test suite', () => {
 
         const message = document.querySelector('.message')
         expect(message).not.toBeInTheDocument()
+    })
+
+
+    test('Passes credentials correctly', () => {
+        const userNameInput = document.querySelector('input#userName')!
+        const passwordInput = document.querySelector('input#password')!
+        const loginButton = document.querySelector('input[type="submit"]')!
+
+        fireEvent.change(userNameInput, {target:{value: 'wrongUserName'}})
+        fireEvent.change(passwordInput, {target:{value: 'wrongPassword'}})
+        fireEvent.click(loginButton)
+
+        expect(authServiceMock.login).toBeCalledWith('wrongUserName', 'wrongPassword')
     })
 })
