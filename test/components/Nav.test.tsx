@@ -11,6 +11,8 @@ const someUser: User = {
     email: 'user@email.com'
 }
 
+const baseLink = 'http://localhost'
+
 
 describe('Navbar test suite', () => {
     let container : HTMLDivElement
@@ -18,7 +20,6 @@ describe('Navbar test suite', () => {
     beforeEach(() => {
         container = document.createElement('div')
         document.body.appendChild(container)
-        ReactDOM.render(<StaticRouter><Nav user={someUser}/></StaticRouter>, container)
     })
 
     afterEach(()=> {
@@ -27,8 +28,34 @@ describe('Navbar test suite', () => {
     })
 
     
-    test('Renders correct HTML-elements', () => {
-        
+    test('Renders correct HTML-elements with user', () => {
+        ReactDOM.render(<StaticRouter><Nav user={someUser}/></StaticRouter>, container)
+
+        const homeLink = document.querySelector('a[data-test-id="home"]') as HTMLAnchorElement
+        const profileLink = document.querySelector('a[data-test-id="profile"]') as HTMLAnchorElement
+        const spacesLink = document.querySelector('a[data-test-id="spaces"]') as HTMLAnchorElement
+        const loginLink = document.querySelector('a[data-test-id="login"]') as HTMLAnchorElement
+
+        expect(homeLink.href).toBe(baseLink + '/')
+        expect(profileLink.href).toBe(baseLink + '/profile')
+        expect(spacesLink.href).toBe(baseLink + '/spaces')
+        expect(loginLink.href).toBe(baseLink + '/login')
+        expect(loginLink).toHaveTextContent('Logout')
     })
 
+
+    test('Renders correct HTML-elements without user', () => {
+        ReactDOM.render(<StaticRouter><Nav user={undefined}/></StaticRouter>, container)
+
+        const homeLink = document.querySelector('a[data-test-id="home"]') as HTMLAnchorElement
+        const profileLink = document.querySelector('a[data-test-id="profile"]') as HTMLAnchorElement
+        const spacesLink = document.querySelector('a[data-test-id="spaces"]') as HTMLAnchorElement
+        const loginLink = document.querySelector('a[data-test-id="login"]') as HTMLAnchorElement
+
+        expect(homeLink.href).toBe(baseLink + '/')
+        expect(profileLink.href).toBe(baseLink + '/profile')
+        expect(spacesLink.href).toBe(baseLink + '/spaces')
+        expect(loginLink.href).toBe(baseLink + '/login')
+        expect(loginLink).toHaveTextContent('Login')
+    })
 })

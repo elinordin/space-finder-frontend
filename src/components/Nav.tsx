@@ -29,11 +29,11 @@ export default class Nav extends React.Component<NavProps> {
         return (
             <nav style={styles.nav}>
                 <div style={styles.left}>
-                    <Link to='/' style={styles.link}>Home</Link>
-                    <Link to='/profile' style={styles.link}>Profile</Link>      
-                    <Link to='/spaces' style={styles.link}>Spaces</Link>      
+                    <Link to='/' data-test-id='home' style={styles.link}>Home</Link>
+                    <Link to='/profile' data-test-id='profile' style={styles.link}>Profile</Link>      
+                    <Link to='/spaces' data-test-id='spaces' style={styles.link}>Spaces</Link>      
                 </div>
-                <Link to='/login' style={styles.link}>{this.props.user? 'Logout' : 'Login'}</Link>
+                <Link to='/login' data-test-id='login' style={styles.link}>{this.props.user? 'Logout' : 'Login'}</Link>
             </nav>
         )
     }
