@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, waitFor } from '@testing-library/react'
 
 import Spaces from '../../src/components/Spaces'
 import { SpaceItem } from '../../src/models/Model'
@@ -52,19 +52,25 @@ describe('Spaces test suite', () => {
 
 
     test('Renders correct HTML-elements', () => {
-        const wrapper = document.querySelector('ul')!
-        expect(wrapper).toBeDefined()
+        const wrapper = document.querySelector('ul')
+        expect(wrapper).toBeInTheDocument()
 
-        const spaces = document.querySelectorAll('.space-component')!
+        const spaces = document.querySelectorAll('.space-component')
         expect(spaces.length).toBe(4)
 
-        const popup = document.querySelector('.popup')!
-        expect(popup).toBeDefined()
+        const reserveButtons = document.querySelectorAll('button')
+        expect(reserveButtons.length).toBe(spaces.length)
+
+        const popup = document.querySelector('.popup')
+        expect(popup).not.toBeInTheDocument()
     })
 
     
-    test('Correctly calls reserve on all spaces buttons', () => {
+    test('Passes the right credentials to reserve function', () => {
+        const reserveButtons = document.querySelectorAll('button')
+        fireEvent.click(reserveButtons[0])
 
+        expect(dataServiceMock.reserveSpace).toBeCalledWith('1')
     })
     
 })
