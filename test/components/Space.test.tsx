@@ -33,13 +33,22 @@ describe('Space test suite', () => {
         })
 
 
-        test('To still render a photo', () => {
+        test('Still renders a photo', () => {
             const image = document.querySelector('img')!
             expect(image.src).toBeTruthy()
         })
 
 
-        test('Passing the right credentials to reserve function', () => {
+        test('Contains all correct list-items', () => {
+            const listItems = document.querySelectorAll('li')!
+            
+            expect(listItems[0]).toHaveTextContent('1')
+            expect(listItems[1]).toHaveTextContent('Hotel')
+            expect(listItems[2]).toHaveTextContent('Stockholm')
+        })
+
+
+        test('Passes the right credentials to reserve function', () => {
             const reserveButton = document.querySelector('button')!
             fireEvent.click(reserveButton)
 
@@ -63,7 +72,7 @@ describe('Space test suite', () => {
         })
 
         
-        test('To render the correct photo', () => {
+        test('Renders the correct photo', () => {
             const image = document.querySelector('img')!
             expect(image.src).toBe('https://picsum.photos/500/500')
         })
