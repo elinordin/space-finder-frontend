@@ -1,4 +1,4 @@
-import { ReactDOM } from 'react-dom'
+import ReactDOM from 'react-dom'
 import Login from '../../src/components/Login'
 
 describe('Login component test suite', () => {
@@ -7,13 +7,20 @@ describe('Login component test suite', () => {
     const authServiceMock = {login: jest.fn()}
     const setUserMock = jest.fn()
 
+    let container : HTMLElement
+
     beforeEach(() => {
+        container = document.createElement('div')
+        document.body.appendChild(container)
         ReactDOM.render(
-            <Login authService={authServiceMock as any} setUser={setUserMock}/>
+            <Login authService={authServiceMock as any} setUser={setUserMock}/>,
+            container
         )
     })
 
     afterEach(() => {
+        document.body.removeChild(container)
+        container.remove()
         jest.clearAllMocks()
     })
 
