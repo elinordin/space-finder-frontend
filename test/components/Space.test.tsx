@@ -7,7 +7,7 @@ import Space from '../../src/components/Space'
 describe('Space test suite', () => {
     let container : HTMLDivElement
 
-    const reserveSpaceMock = jest.fn()
+    const reserveMock = jest.fn()
 
     beforeAll(() => {
         container = document.createElement('div')
@@ -20,27 +20,35 @@ describe('Space test suite', () => {
     })
 
 
-    describe('without photoURL', () => {
+    describe('Without photoURL', () => {
         beforeEach(() => {
             ReactDOM.render(
                 <Space 
                     id='1' 
                     name='Hotel' 
                     location='Stockholm' 
-                    reserve={reserveSpaceMock}
+                    reserve={reserveMock}
                 />
             , container)
         })
 
 
-        test('to still render a photo', () => {
+        test('To still render a photo', () => {
             const image = document.querySelector('img')!
             expect(image.src).toBeTruthy()
+        })
+
+
+        test('Passing the right credentials to reserve function', () => {
+            const reserveButton = document.querySelector('button')!
+            fireEvent.click(reserveButton)
+
+            expect(reserveMock).toBeCalledWith('1')
         })
     })
 
 
-    describe('with photoURL', () => {
+    describe('With photoURL', () => {
         beforeEach(() => {
             ReactDOM.render(
                 <Space 
@@ -48,13 +56,13 @@ describe('Space test suite', () => {
                     name='Hotel' 
                     location='Stockholm' 
                     photo='https://picsum.photos/500/500' 
-                    reserve={reserveSpaceMock}
+                    reserve={reserveMock}
                 />
             , container)
         })
 
         
-        test('to render the correct photo', () => {
+        test('To render the correct photo', () => {
             const image = document.querySelector('img')!
             expect(image.src).toBe('https://picsum.photos/500/500')
         })
