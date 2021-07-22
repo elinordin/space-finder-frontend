@@ -48,10 +48,10 @@ describe('Login component test suite', () => {
         const passwordInput = document.querySelector('input#password')!
         const loginButton = document.querySelector('input[type="submit"]')!
 
-        fireEvent.change(userNameInput, {target:{value: 'wrongUserName'}})
-        fireEvent.change(passwordInput, {target:{value: 'wrongPassword'}})
+        fireEvent.change(userNameInput, {target:{value: 'aUserName'}})
+        fireEvent.change(passwordInput, {target:{value: 'aPassword'}})
         fireEvent.click(loginButton)
 
-        expect(authServiceMock.login).toBeCalledWith('wrongUserName', 'wrongPassword')
+        expect(authServiceMock.login).toBeCalledWith('aUserName', 'aPassword')
     })
 })
