@@ -18,7 +18,8 @@ const config: Config.InitialOptions = {
     collectCoverageFrom: [
         'src/**/*.{ts,tsx}',
         '!src/services/**',
-        '!src/react-app-env.d.ts'
+        '!src/react-app-env.d.ts',
+        '!src/index.tsx'
     ]
 }
 
