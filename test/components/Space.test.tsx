@@ -17,6 +17,7 @@ describe('Space test suite', () => {
     afterAll(()=> {
         document.body.removeChild(container)
         container.remove()
+        jest.clearAllMocks()
     })
 
 
