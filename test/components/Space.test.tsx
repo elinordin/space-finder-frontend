@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom'
+import { fireEvent } from '@testing-library/react'
 
 import Space from '../../src/components/Space'
 
@@ -32,10 +33,10 @@ describe('Space test suite', () => {
         })
 
 
-        test('my test', () => {
-
+        test('to still render a photo', () => {
+            const image = document.querySelector('img')!
+            expect(image.src).toBeTruthy()
         })
-
     })
 
 
@@ -46,17 +47,17 @@ describe('Space test suite', () => {
                     id='1' 
                     name='Hotel' 
                     location='Stockholm' 
-                    photo='https://picsum.photos/400/300' 
+                    photo='https://picsum.photos/500/500' 
                     reserve={reserveSpaceMock}
                 />
             , container)
         })
 
         
-        test('my test', () => {
-            
+        test('to render the correct photo', () => {
+            const image = document.querySelector('img')!
+            expect(image.src).toBe('https://picsum.photos/500/500')
         })
-
     })
 
     
