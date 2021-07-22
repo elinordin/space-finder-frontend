@@ -57,7 +57,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                     <input 
                         value={this.state.password} 
                         onChange={(e) => this.setState({password: e.target.value})}
-                        type="text" name="" id="password" /><br/>
+                        type="password" name="" id="password" /><br/>
                     <input 
                         type="submit" value="Login" />
                 </form>
