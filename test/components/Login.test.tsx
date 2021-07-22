@@ -24,7 +24,20 @@ describe('Login component test suite', () => {
         jest.clearAllMocks()
     })
 
-    test('Contains all HTML-elements', () => {
-        
+    test('Renders correct HTML-elements', () => {
+        const title = document.querySelector('h2')
+        expect(title).toBeDefined()
+
+        const inputs = document.querySelectorAll('input')
+        expect(inputs).toHaveLength(3)
+        expect(inputs[0].type).toBe('text')
+        expect(inputs[0].id).toBe('userName')
+        expect(inputs[1].type).toBe('password')
+        expect(inputs[1].id).toBe('password')
+        expect(inputs[2].type).toBe('submit')
+        expect(inputs[2].value).toBe('Login')
+
+        const message = document.querySelector('.message')
+        expect(message).not.toBeInTheDocument()
     })
 })

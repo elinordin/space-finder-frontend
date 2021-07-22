@@ -57,11 +57,10 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                     <input 
                         value={this.state.password} 
                         onChange={(e) => this.setState({password: e.target.value})}
-                        type="password" name="" id="password" /><br/>
-                    <input 
-                        type="submit" value="Login" />
+                        type="password" id="password" /><br/>
+                    <input type="submit" value="Login" />
                 </form>
-                {this.state.loginAttempted && <p>{this.state.loginSuccessful ? 'Login successful' : 'Login failed'}</p>}
+                {this.state.loginAttempted && <p className='message'>{this.state.loginSuccessful ? 'Login successful' : 'Login failed'}</p>}
             </section>
         )
     }
