@@ -78,7 +78,8 @@ describe('Spaces test suite', () => {
         dataServiceMock.reserveSpace.mockResolvedValueOnce(true)
         const reserveButtons = document.querySelectorAll('button')
         fireEvent.click(reserveButtons[0])
-        await waitFor(() => expect(dataServiceMock.reserveSpace.mock.results[0].value).resolves.toBe(true))
+        
+        await waitFor(() => dataServiceMock.reserveSpace)
 
         const popup = await waitFor(() => document.querySelector('.popup'))
         expect(popup).toBeInTheDocument()      
