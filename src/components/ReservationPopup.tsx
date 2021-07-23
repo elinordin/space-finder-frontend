@@ -18,7 +18,7 @@ export default class ReservationPopup extends React.Component <ReservationPopupP
                     <div className='popup'>
                         <h2>{this.props.available? 'Reservation successful' : 'Reservation failed'}</h2>
                         <p>{this.props.available? `Your booking ID is: ${this.props.id}` : 'Please try another day'}</p>
-                        <button onClick={this.props.close}>Ok, got it!</button>
+                        <button className='close-btn' onClick={this.props.close}>Ok, got it!</button>
                     </div>
                 </div>
             )

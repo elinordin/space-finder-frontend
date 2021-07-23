@@ -78,7 +78,6 @@ describe('Spaces test suite', () => {
         dataServiceMock.reserveSpace.mockResolvedValueOnce(true)
         const reserveButtons = document.querySelectorAll('button')
         fireEvent.click(reserveButtons[0])
-        expect(dataServiceMock.reserveSpace).toBeCalledWith('1')
         await waitFor(() => expect(dataServiceMock.reserveSpace.mock.results[0].value).resolves.toBe(true))
 
         const popup = await waitFor(() => document.querySelector('.popup'))
@@ -114,5 +113,21 @@ describe('Spaces test suite', () => {
         const bookingIdText = document.querySelector('p')
         expect(bookingIdText).toHaveTextContent('Please try another day')
     })
-    
+
+
+    test('Closes popup on click of close button', async () => {
+        dataServiceMock.reserveSpace.mockResolvedValueOnce(true)
+        const reserveButtons = document.querySelectorAll('button')
+        fireEvent.click(reserveButtons[0])
+
+        await waitFor(() => dataServiceMock.reserveSpace)
+
+        const closeButton = await waitFor(() => document.querySelector('.close-btn')!)
+        expect(closeButton).toBeInTheDocument()  
+        fireEvent.click(closeButton)
+
+        const popup = document.querySelector('.popup')
+        expect(popup).not.toBeInTheDocument()
+    })
+
 })
