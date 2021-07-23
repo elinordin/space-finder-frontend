@@ -38,7 +38,7 @@ describe('Spaces test suite', () => {
     }
 
     beforeEach(() => {
-        dataServiceMock.getSpaceItems.mockResolvedValueOnce(someSpaces)
+        dataServiceMock.getSpaceItems.mockResolvedValue(someSpaces)
         container = document.createElement('div')
         document.body.appendChild(container)
         ReactDOM.render(<Spaces dataService={(dataServiceMock as any) as DataService}/>, container)
@@ -71,6 +71,18 @@ describe('Spaces test suite', () => {
         fireEvent.click(reserveButtons[0])
 
         expect(dataServiceMock.reserveSpace).toBeCalledWith('1')
+    })
+
+
+    test('Displays popup on click of reserve button', async () => {
+        dataServiceMock.reserveSpace.mockResolvedValueOnce(true)
+        const reserveButtons = document.querySelectorAll('button')
+        fireEvent.click(reserveButtons[0])
+        expect(dataServiceMock.reserveSpace).toBeCalledWith('1')
+        await waitFor(() => expect(dataServiceMock.reserveSpace.mock.results[0].value).resolves.toBe(true))
+
+        const popup = await waitFor(() => document.querySelector('.popup'))
+        expect(popup).toBeInTheDocument()      
     })
     
 })
