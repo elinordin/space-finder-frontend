@@ -25,6 +25,8 @@ const userAttributes = [
     }
 ]
 
+const baseLink = 'http://localhost'
+
 
 describe('Profile test suite', () => {
 
@@ -51,8 +53,14 @@ describe('Profile test suite', () => {
             <Profile user={someUser} authService={authServiceMock as any}/>
         , container))
 
-        test('Test 1', () => {
+        test('Renders correct HTML-elements', () => {
+            const heading = document.querySelector('h2')
+            const list = document.querySelector('ul')
+            const listItems = document.querySelectorAll('li')
 
+            expect(heading).toBeInTheDocument()
+            expect(list).toBeInTheDocument()
+            expect(listItems.length).toBe(4)
         })    
 
     })
@@ -63,9 +71,14 @@ describe('Profile test suite', () => {
             <StaticRouter><Profile user={undefined} authService={authServiceMock as any}/></StaticRouter>
         , container))
 
-        test('Test 1', () => {
+        test('Renders correct HTML-elements', () => {
+            const info = document.querySelector('p')
+            const loginLink = document.querySelector('a') as HTMLAnchorElement
 
-        })    
+            expect(info).toBeInTheDocument()
+            expect(info).toHaveTextContent('Please login to see profile details')
+            expect(loginLink.href).toBe(baseLink + '/login')
+        })   
 
     })
 
