@@ -84,5 +84,35 @@ describe('Spaces test suite', () => {
         const popup = await waitFor(() => document.querySelector('.popup'))
         expect(popup).toBeInTheDocument()      
     })
+
+
+    test('Displays correct popup text on available reserve request', async () => {
+        dataServiceMock.reserveSpace.mockResolvedValueOnce(true)
+        const reserveButtons = document.querySelectorAll('button')
+        fireEvent.click(reserveButtons[0])
+        expect(dataServiceMock.reserveSpace).toBeCalledWith('1')
+        
+        await waitFor(() => dataServiceMock.reserveSpace)
+        
+        const popupHeading = document.querySelector('h2')
+        expect(popupHeading).toHaveTextContent('Reservation successful')
+        const bookingIdText = document.querySelector('p')
+        expect(bookingIdText).toHaveTextContent('Your booking ID is: 1')
+    })
+
+
+    test('Displays correct popup text on unavailable reserve request', async () => {
+        dataServiceMock.reserveSpace.mockResolvedValueOnce(false)
+        const reserveButtons = document.querySelectorAll('button')
+        fireEvent.click(reserveButtons[1])
+        expect(dataServiceMock.reserveSpace).toBeCalledWith('2')
+        
+        await waitFor(() => dataServiceMock.reserveSpace)
+        
+        const popupHeading = document.querySelector('h2')
+        expect(popupHeading).toHaveTextContent('Reservation failed')
+        const bookingIdText = document.querySelector('p')
+        expect(bookingIdText).toHaveTextContent('Please try another day')
+    })
     
 })
