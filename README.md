@@ -1,6 +1,6 @@
 # Typescript and Jest Exercise
 ---
-Exersise is from the 'Typescript with React classes - quick start - Jest testing" course on Udemy by Alex Horea
+Exercise is from the 'Typescript with React classes - quick start - Jest testing" course on Udemy by Alex Horea
 
 ### :closed_book: Learnings:
 
